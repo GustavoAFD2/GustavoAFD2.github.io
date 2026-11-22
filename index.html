@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustavo Alves | Desenvolvedor Java Backend & Software</title>
+  <meta name="description" content="Portfólio profissional de Gustavo Alves (@GustavoAFD2) - Desenvolvedor Java Backend, Engenharia de Software (Cruzeiro do Sul), ADS (FATEC Guarulhos) e Técnico em Informática (ETEC Parque Belém)." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M10.2 3.2c.8 1.2-.9 2.2-.3 3.5.3.7 1 1.1 1.1 1.8' stroke='%23F89820' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M13.6 2.4c.9 1.3-1 2.4-.3 3.8.3.7 1.1 1.1 1.2 1.9' stroke='%23F89820' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M6.5 10.5h9.5v3.1a4.75 4.75 0 0 1-9.5 0v-3.1Z' stroke='%230EA5E9' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 11.2h1.4a1.8 1.8 0 0 1 0 3.6H16' stroke='%230EA5E9' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M5 19.7c3.5.9 9 .9 12.5 0' stroke='%23F89820' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body, section, footer, .glass-card, .corner-btn {
+      transition: background-color 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.45s ease,
+                  box-shadow 0.6s ease;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #FFFFFF; }
+    html.dark ::-webkit-scrollbar-track { background: #040711; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+    html.dark ::-webkit-scrollbar-thumb { background: #1E293B; }
+    ::-webkit-scrollbar-thumb:hover { background: #2563EB; }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+    ::view-transition-old(root) { z-index: 1; }
+    ::view-transition-new(root) {
+      z-index: 9999;
+      animation: radialReveal 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes radialReveal {
+      from { clip-path: circle(0px at var(--click-x, 44px) var(--click-y, 44px)); }
+      to { clip-path: circle(155vmax at var(--click-x, 44px) var(--click-y, 44px)); }
+    }
+
+    @keyframes spinClockwise {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes spinCounterClockwise {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+    @keyframes counterSpinCW {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes counterSpinCCW {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes iconBreath {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .orbit-cw { animation: spinClockwise 68s linear infinite; }
+    .orbit-ccw { animation: spinCounterClockwise 92s linear infinite; }
+    .orbit-cw-slow { animation: spinClockwise 124s linear infinite; }
+
+    .orbit-counter-cw { animation: counterSpinCW 68s linear infinite; }
+    .orbit-counter-ccw { animation: counterSpinCCW 92s linear infinite; }
+    .orbit-counter-cw-slow { animation: counterSpinCW 124s linear infinite; }
+
+    .orbit-icon-breath { animation: iconBreath 6s ease-in-out infinite; }
+
+    @keyframes wordPopIn {
+      0% { opacity: 0; transform: translateY(14px) scale(0.92); filter: blur(6px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+    }
+    .preloader-word-anim { animation: wordPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    #reticle-cursor {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      will-change: transform, width, height, border-radius;
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-radius 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.25s ease;
+    }
+    #reticle-cursor.text-lock {
+      border-radius: 10px;
+      background: rgba(37, 99, 235, 0.08);
+    }
+    html.dark #reticle-cursor.text-lock { background: rgba(56, 189, 248, 0.1); }
+
+    .corner-btn {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      box-shadow: 0 6px 20px -6px rgba(15, 23, 42, 0.12);
+    }
+    html.dark .corner-btn {
+      background: rgba(10, 16, 32, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.7);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.08);
+    }
+    html.dark .glass-card {
+      background: rgba(10, 16, 32, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.65);
+    }
+
+    .json-key { color: #1D4ED8; }
+    .json-string { color: #15803D; }
+    .json-number { color: #B45309; }
+    .json-boolean { color: #BE185D; }
+    html.dark .json-key { color: #38BDF8; }
+    html.dark .json-string { color: #4ADE80; }
+    html.dark .json-number { color: #FACC15; }
+    html.dark .json-boolean { color: #F472B6; }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) scale(0.7); opacity: 1; }
+      100% { transform: translateY(-75px) scale(1.3); opacity: 0; }
+    }
+    .heart-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      animation: floatHeart 0.95s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-[#040711] dark:text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white dark:selection:bg-sky-400 dark:selection:text-slate-950 overflow-x-hidden min-h-screen">
+
+  <div id="toast-box" class="fixed bottom-6 right-6 z-[100001] pointer-events-none opacity-0 translate-y-3 transition-all duration-300">
+    <div class="px-4 py-3 rounded-xl bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-mono text-xs font-bold shadow-2xl flex items-center gap-2.5">
+      <i class="fa-solid fa-circle-check"></i>
+      <span id="toast-message">Copiado!</span>
+    </div>
+  </div>
+
+  <div id="reticle-cursor" class="hidden md:flex flex-col items-center justify-center w-10 h-10">
+    <div class="relative w-full h-full flex items-center justify-center">
+      <span class="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-blue-600 dark:border-sky-400"></span>
+      <span class="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-blue-600 dark:border-sky-400"></span>
+      <span class="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-blue-600 dark:border-sky-400"></span>
+      <span class="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-blue-600 dark:border-sky-400"></span>
+      <span id="cursor-dot" class="w-1.5 h-1.5 bg-blue-600 dark:bg-sky-400 rounded-full shadow-[0_0_10px_#38bdf8]"></span>
+    </div>
+    <span id="cursor-label" class="opacity-0 translate-y-1 transition-all duration-200 text-[9px] font-mono tracking-widest font-bold uppercase bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 px-1.5 py-0.5 rounded shadow mt-1.5 whitespace-nowrap"></span>
+  </div>
+
+  <div id="preloader" class="fixed inset-0 z-[100000] bg-white dark:bg-[#040711] flex flex-col items-center justify-center transition-transform duration-700 ease-in-out">
+    <div class="flex flex-col items-center px-4 text-center">
+      <div class="flex items-center gap-2.5 mb-3">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-sky-400 animate-pulse"></span>
+        <span id="preloader-lang-tag" class="text-xs font-mono uppercase tracking-[0.25em] text-blue-600 dark:text-sky-400 font-bold">Português</span>
+      </div>
+      <div class="h-24 flex items-center justify-center">
+        <h1 id="preloader-text" class="text-5xl sm:text-7xl font-black tracking-tight text-slate-900 dark:text-white">• Olá</h1>
+      </div>
+      <div class="w-56 h-1 bg-slate-200 dark:bg-slate-800/90 rounded-full overflow-hidden mt-4">
+        <div id="preloader-bar" class="h-full bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 w-0 transition-all duration-300 ease-out"></div>
+      </div>
+    </div>
+    <button onclick="finishPreloader()" data-cursor="PULAR" class="absolute bottom-8 right-8 text-xs font-mono text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-sky-400 border border-slate-300 dark:border-slate-800 hover:border-blue-500 px-3.5 py-1.5 rounded-full transition-all flex items-center gap-2 cursor-pointer">
+      <span data-i18n="preloader.skip">Pular Introdução</span>
+      <i class="fa-solid fa-forward text-[10px]"></i>
+    </button>
+  </div>
+
+  <button id="theme-toggle-btn" onclick="toggleTheme(event)" data-cursor="TEMA" class="fixed top-6 left-6 z-50 w-11 h-11 rounded-xl corner-btn flex items-center justify-center text-blue-600 dark:text-sky-400 hover:scale-105 active:scale-95 transition-transform cursor-pointer group" title="Alternar Modo Claro / Escuro">
+    <i class="fa-solid fa-sun text-base hidden dark:inline-block text-sky-400 group-hover:rotate-90 transition-transform duration-500"></i>
+    <i class="fa-solid fa-moon text-base inline-block dark:hidden text-blue-600 group-hover:-rotate-12 transition-transform duration-500"></i>
+  </button>
+
+  <div class="fixed top-6 right-6 z-50 flex items-center gap-2.5">
+    <div class="corner-btn h-11 px-1.5 rounded-xl flex items-center gap-1" data-cursor="IDIOMA">
+      <button id="lang-pt-btn" onclick="switchLanguage('pt')" class="px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-all bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 cursor-pointer">PT</button>
+      <button id="lang-en-btn" onclick="switchLanguage('en')" class="px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-sky-400 cursor-pointer">EN</button>
+    </div>
+
+    <button onclick="toggleDrawer()" data-cursor="MENU" class="w-11 h-11 rounded-xl corner-btn flex items-center justify-center text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-sky-400 hover:scale-105 active:scale-95 transition-transform cursor-pointer" title="Menu de Navegação">
+      <i class="fa-solid fa-bars text-base"></i>
+    </button>
+  </div>
+
+  <div id="nav-drawer-backdrop" onclick="toggleDrawer()" class="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"></div>
+  <aside id="nav-drawer" class="fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[85vw] bg-white dark:bg-[#070C1B] border-l border-blue-500/20 dark:border-sky-400/20 p-7 flex flex-col justify-between translate-x-full transition-transform duration-300 ease-out shadow-2xl">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
+        <span class="font-mono text-xs font-bold tracking-widest text-blue-600 dark:text-sky-400 uppercase">GUSTAVO ALVES</span>
+        <button onclick="toggleDrawer()" class="w-9 h-9 rounded-lg corner-btn flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="mt-8 flex flex-col space-y-2">
+        <a href="#hero" onclick="toggleDrawer()" class="px-4 py-3 rounded-xl font-bold text-base text-slate-800 dark:text-slate-200 hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center justify-between">
+          <span data-i18n="nav.hero">Início</span><span class="font-mono text-xs opacity-50">01</span>
+        </a>
+        <a href="#about" onclick="toggleDrawer()" class="px-4 py-3 rounded-xl font-bold text-base text-slate-800 dark:text-slate-200 hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center justify-between">
+          <span data-i18n="nav.about">Sobre Mim & Formação</span><span class="font-mono text-xs opacity-50">02</span>
+        </a>
+        <a href="#timeline" onclick="toggleDrawer()" class="px-4 py-3 rounded-xl font-bold text-base text-slate-800 dark:text-slate-200 hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center justify-between">
+          <span data-i18n="nav.timeline">Trilha Backend (16 Semanas)</span><span class="font-mono text-xs opacity-50">03</span>
+        </a>
+        <a href="#projects" onclick="toggleDrawer()" class="px-4 py-3 rounded-xl font-bold text-base text-slate-800 dark:text-slate-200 hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center justify-between">
+          <span data-i18n="nav.projects">Projetos & GitHub</span><span class="font-mono text-xs opacity-50">04</span>
+        </a>
+        <a href="#skills" onclick="toggleDrawer()" class="px-4 py-3 rounded-xl font-bold text-base text-slate-800 dark:text-slate-200 hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center justify-between">
+          <span data-i18n="nav.skills">Linguagens & Aplicativos</span><span class="font-mono text-xs opacity-50">05</span>
+        </a>
+        <a href="#terminal" onclick="toggleDrawer()" class="px-4 py-3 rounded-xl font-bold text-base text-slate-800 dark:text-slate-200 hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center justify-between">
+          <span data-i18n="nav.terminal">Simulador REST API</span><span class="font-mono text-xs opacity-50">06</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="space-y-3 pt-6 border-t border-slate-200 dark:border-slate-800">
+      <button onclick="toggleDrawer(); replayPreloader();" class="w-full py-2.5 px-4 rounded-xl corner-btn text-xs font-mono font-bold text-blue-600 dark:text-sky-400 flex items-center justify-center gap-2 cursor-pointer">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span data-i18n="drawer.replay">Reexibir Introdução</span>
+      </button>
+      <div class="flex items-center justify-center gap-4 pt-2 text-slate-500">
+        <a href="https://github.com/GustavoAFD2" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-sky-400 text-lg"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/gustavo-alves-b47a2b420" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-sky-400 text-lg"><i class="fa-brands fa-linkedin"></i></a>
+        <button onclick="copyEmailToClipboard()" class="hover:text-blue-600 dark:hover:text-sky-400 text-lg cursor-pointer"><i class="fa-solid fa-envelope"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent dark:from-sky-500/15"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+      <div class="absolute top-1/2 left-1/2 w-[380px] h-[380px] sm:w-[580px] sm:h-[580px] rounded-full border border-blue-500/20 dark:border-sky-400/20 orbit-cw">
+        <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 flex items-center justify-center">
+          <div class="orbit-counter-cw flex items-center justify-center">
+            <svg viewBox="0 0 24 24" class="w-8 h-8 orbit-icon-breath drop-shadow-sm" fill="none">
+              <path d="M10.2 3.2c.8 1.2-.9 2.2-.3 3.5.3.7 1 1.1 1.1 1.8" stroke="#F89820" stroke-width="2" stroke-linecap="round"/>
+              <path d="M13.6 2.4c.9 1.3-1 2.4-.3 3.8.3.7 1.1 1.1 1.2 1.9" stroke="#F89820" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6.5 10.5h9.5v3.1a4.75 4.75 0 0 1-9.5 0v-3.1Z" stroke="#2563EB" class="dark:stroke-sky-400" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M16 11.2h1.4a1.8 1.8 0 0 1 0 3.6H16" stroke="#2563EB" class="dark:stroke-sky-400" stroke-width="2" stroke-linecap="round"/>
+              <path d="M5 19.7c3.5.9 9 .9 12.5 0" stroke="#F89820" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="absolute top-[22%] -right-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw flex items-center justify-center">
+            <i class="fa-solid fa-leaf text-[#6DB33F] text-2xl orbit-icon-breath" style="animation-delay: 0.7s;"></i>
+          </div>
+        </div>
+        <div class="absolute bottom-[22%] -right-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw flex items-center justify-center">
+            <i class="fa-solid fa-database text-blue-600 dark:text-sky-400 text-2xl orbit-icon-breath" style="animation-delay: 1.4s;"></i>
+          </div>
+        </div>
+        <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-10 h-10 flex items-center justify-center">
+          <div class="orbit-counter-cw flex items-center justify-center">
+            <i class="fa-brands fa-docker text-blue-500 dark:text-sky-400 text-2xl orbit-icon-breath" style="animation-delay: 2.1s;"></i>
+          </div>
+        </div>
+        <div class="absolute bottom-[22%] -left-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw flex items-center justify-center">
+            <i class="fa-brands fa-git-alt text-orange-500 text-2xl orbit-icon-breath" style="animation-delay: 2.8s;"></i>
+          </div>
+        </div>
+        <div class="absolute top-[22%] -left-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw flex items-center justify-center">
+            <i class="fa-solid fa-network-wired text-emerald-500 text-xl orbit-icon-breath" style="animation-delay: 3.5s;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute top-1/2 left-1/2 w-[560px] h-[560px] sm:w-[850px] sm:h-[850px] rounded-full border border-blue-500/15 dark:border-sky-400/15 orbit-ccw">
+        <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 flex items-center justify-center">
+          <div class="orbit-counter-ccw flex items-center justify-center">
+            <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-purple-700 via-pink-600 to-amber-500 flex items-center justify-center text-white font-mono font-black text-xs shadow-md">IJ</div>
+          </div>
+        </div>
+        <div class="absolute top-[24%] -right-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-ccw flex items-center justify-center">
+            <i class="fa-solid fa-code text-blue-600 dark:text-sky-400 text-2xl orbit-icon-breath" style="animation-delay: 0.9s;"></i>
+          </div>
+        </div>
+        <div class="absolute bottom-[24%] -right-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-ccw flex items-center justify-center">
+            <i class="fa-solid fa-rocket text-orange-500 text-2xl orbit-icon-breath" style="animation-delay: 1.8s;"></i>
+          </div>
+        </div>
+        <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-10 h-10 flex items-center justify-center">
+          <div class="orbit-counter-ccw flex items-center justify-center">
+            <i class="fa-brands fa-github text-slate-700 dark:text-slate-300 text-3xl orbit-icon-breath" style="animation-delay: 2.5s;"></i>
+          </div>
+        </div>
+        <div class="absolute bottom-[24%] -left-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-ccw flex items-center justify-center">
+            <i class="fa-solid fa-server text-blue-500 dark:text-sky-400 text-2xl orbit-icon-breath" style="animation-delay: 3.1s;"></i>
+          </div>
+        </div>
+        <div class="absolute top-[24%] -left-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-ccw flex items-center justify-center">
+            <i class="fa-solid fa-feather-pointed text-rose-500 text-2xl orbit-icon-breath" style="animation-delay: 3.9s;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute top-1/2 left-1/2 w-[740px] h-[740px] sm:w-[1120px] sm:h-[1120px] rounded-full border border-blue-500/10 dark:border-sky-400/10 orbit-cw-slow">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw-slow flex items-center justify-center">
+            <div class="w-8 h-8 rounded bg-amber-400 text-slate-950 font-extrabold flex items-center justify-center text-xs shadow">JS</div>
+          </div>
+        </div>
+        <div class="absolute top-[25%] -right-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw-slow flex items-center justify-center">
+            <div class="w-8 h-8 rounded bg-blue-600 text-white font-extrabold flex items-center justify-center text-xs shadow">TS</div>
+          </div>
+        </div>
+        <div class="absolute bottom-[25%] -right-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw-slow flex items-center justify-center">
+            <i class="fa-brands fa-html5 text-orange-600 text-3xl"></i>
+          </div>
+        </div>
+        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw-slow flex items-center justify-center">
+            <i class="fa-brands fa-css3-alt text-blue-500 text-3xl"></i>
+          </div>
+        </div>
+        <div class="absolute bottom-[25%] -left-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw-slow flex items-center justify-center">
+            <i class="fa-solid fa-shield-halved text-emerald-500 text-2xl"></i>
+          </div>
+        </div>
+        <div class="absolute top-[25%] -left-4 w-9 h-9 flex items-center justify-center">
+          <div class="orbit-counter-cw-slow flex items-center justify-center font-mono text-base font-black text-blue-600 dark:text-sky-400">
+            <span>&gt;_</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-3xl w-full mx-auto flex flex-col items-center text-center space-y-5 relative z-10 px-2">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full corner-btn text-[11px] font-mono font-bold tracking-widest uppercase text-slate-700 dark:text-slate-200">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <span data-i18n="hero.badge">DISPONÍVEL PARA ESTÁGIO</span>
+      </div>
+
+      <div class="space-y-1">
+        <p class="text-lg sm:text-2xl md:text-[26px] font-normal text-slate-800 dark:text-slate-200 tracking-tight" data-i18n="hero.greeting">
+          Olá! Eu sou Gustavo Alves. Desenvolvedor
+        </p>
+        <h1 class="text-6xl sm:text-8xl md:text-[108px] font-black tracking-tighter leading-[0.95] uppercase">
+          <span id="scramble-title" onclick="scrambleHeroTitle()" data-cursor="SCRAMBLE" class="text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer select-none" title="Clique para animar">
+            BACKEND
+          </span>
+        </h1>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3.5 pt-2">
+        <a href="https://www.linkedin.com/in/gustavo-alves-b47a2b420" target="_blank" rel="noopener noreferrer" data-cursor="LINKEDIN" class="px-7 py-3.5 rounded-xl corner-btn font-bold text-sm text-slate-900 dark:text-white hover:border-blue-600 dark:hover:border-sky-400 hover:-translate-y-0.5 transition-all flex items-center gap-2.5">
+          <i class="fa-brands fa-linkedin text-base"></i>
+          <span>LinkedIn</span>
+        </a>
+
+        <a href="mailto:webdevelopergustavoaf@gmail.com" data-cursor="E-MAIL" class="px-7 py-3.5 rounded-xl bg-blue-600 dark:bg-sky-400 hover:bg-blue-700 dark:hover:bg-sky-300 text-white dark:text-slate-950 font-bold text-sm shadow-lg shadow-blue-600/20 dark:shadow-sky-400/20 hover:-translate-y-0.5 transition-all flex items-center gap-2.5">
+          <i class="fa-regular fa-envelope text-base"></i>
+          <span>Let’s Talk</span>
+        </a>
+
+        <a href="https://github.com/GustavoAFD2" target="_blank" rel="noopener noreferrer" data-cursor="GITHUB" class="px-7 py-3.5 rounded-xl corner-btn font-bold text-sm text-slate-900 dark:text-white hover:border-blue-600 dark:hover:border-sky-400 hover:-translate-y-0.5 transition-all flex items-center gap-2.5">
+          <i class="fa-brands fa-github text-base"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2 text-xs font-mono text-slate-500 dark:text-slate-400">
+        <a href="https://github.com/GustavoAFD2/java-backend-study-platform" target="_blank" rel="noopener noreferrer" data-cursor="ESTUDOS" class="hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-graduation-cap text-blue-600 dark:text-sky-400"></i>
+          <span data-i18n="hero.roadmap_btn">Plano de Estudos Java</span>
+        </a>
+        <span class="opacity-30">•</span>
+        <button onclick="copyEmailToClipboard()" data-cursor="COPIAR" class="hover:text-blue-600 dark:hover:text-sky-400 transition-colors flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-regular fa-envelope text-blue-600 dark:text-sky-400"></i>
+          <span>webdevelopergustavoaf@gmail.com</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-24 px-4 relative border-t border-slate-200/70 dark:border-slate-800/70">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col items-start mb-12">
+        <span class="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-sky-400 font-bold mb-1" data-i18n="about.subtitle">Engenharia & Formação</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-i18n="about.title">Sobre Mim & Formação Acadêmica</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div class="md:col-span-7 glass-card p-6 sm:p-8 rounded-2xl relative overflow-hidden group hover:border-blue-600 dark:hover:border-sky-400 transition-all">
+          <div class="flex items-center gap-3.5 mb-4">
+            <div class="w-11 h-11 rounded-xl bg-blue-600/15 dark:bg-sky-400/15 text-blue-600 dark:text-sky-400 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <div>
+              <span class="text-xs font-mono text-blue-600 dark:text-sky-400 font-semibold" data-i18n="about.edu1_tag">Graduação Bacharelado</span>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white" data-i18n="about.edu1_title">Engenharia de Software</h3>
+            </div>
+          </div>
+          <p class="text-xs font-mono font-bold text-slate-700 dark:text-sky-300 mb-3">Universidade Cruzeiro do Sul</p>
+          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed" data-i18n="about.edu1_desc">
+            Foco em Engenharia de Requisitos, Arquitetura de Software, Qualidade de Código (Clean Code & SOLID), Modelagem de Sistemas, Ciclo de Vida do Software e Práticas DevOps.
+          </p>
+        </div>
+
+        <div class="md:col-span-5 glass-card p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-location-dot text-blue-600 dark:text-sky-400 text-sm"></i>
+              <span class="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">Guarulhos, São Paulo - Brasil</span>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 font-semibold">BRT (UTC-3)</span>
+          </div>
+          <div class="my-3">
+            <span class="text-xs font-mono text-slate-500 dark:text-slate-400 block mb-1" data-i18n="about.time_label">Horário Local Atual:</span>
+            <div id="guarulhos-clock" class="text-3xl sm:text-4xl font-mono font-extrabold text-blue-600 dark:text-sky-400">--:--:--</div>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="about.time_sub">
+            Disponível para oportunidades de estágio remoto, híbrido ou presencial em São Paulo.
+          </p>
+        </div>
+
+        <div class="md:col-span-6 glass-card p-6 rounded-2xl hover:border-blue-600 dark:hover:border-sky-400 transition-all">
+          <div class="flex items-center gap-3.5 mb-3">
+            <div class="w-11 h-11 rounded-xl bg-blue-600/15 dark:bg-sky-400/15 text-blue-600 dark:text-sky-400 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <span class="text-xs font-mono text-blue-600 dark:text-sky-400 font-semibold" data-i18n="about.edu2_tag">Tecnólogo Superior</span>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="about.edu2_title">Análise e Desenvolvimento de Sistemas</h3>
+            </div>
+          </div>
+          <p class="text-xs font-mono font-bold text-slate-700 dark:text-sky-300 mb-2">FATEC Guarulhos — Faculdade de Tecnologia</p>
+          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed" data-i18n="about.edu2_desc">
+            Aprofundamento prático em Algoritmos, Estruturas de Dados, Programação Orientada a Objetos em Java, Bancos de Dados Relacionais (SQL) e Engenharia de Software.
+          </p>
+        </div>
+
+        <div class="md:col-span-6 glass-card p-6 rounded-2xl hover:border-blue-600 dark:hover:border-sky-400 transition-all">
+          <div class="flex items-center gap-3.5 mb-3">
+            <div class="w-11 h-11 rounded-xl bg-blue-600/15 dark:bg-sky-400/15 text-blue-600 dark:text-sky-400 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <div>
+              <span class="text-xs font-mono text-blue-600 dark:text-sky-400 font-semibold" data-i18n="about.edu3_tag">Ensino Técnico</span>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="about.edu3_title">Técnico em Informática para Internet</h3>
+            </div>
+          </div>
+          <p class="text-xs font-mono font-bold text-slate-700 dark:text-sky-300 mb-2">ETEC Parque Belém</p>
+          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed" data-i18n="about.edu3_desc">
+            Base sólida em Lógica de Programação, Desenvolvimento Web (HTML5, CSS3, JavaScript), Bancos de Dados e Fundamentos de Redes e Aplicações Internet.
+          </p>
+        </div>
+
+        <div class="md:col-span-12 glass-card p-6 sm:p-8 rounded-2xl border-blue-600/25 dark:border-sky-400/25">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-2 max-w-2xl">
+              <span class="text-xs font-mono text-blue-600 dark:text-sky-400 font-bold uppercase tracking-wider" data-i18n="about.mindset_tag">Filosofia de Código</span>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white" data-i18n="about.mindset_title">Engenharia Focada em Resiliência & Legibilidade</h3>
+              <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed" data-i18n="about.mindset_desc">
+                Acredito que escrever código limpo é construir sistemas fáceis de manter, testar e evoluir. Cada classe Java e cada tabela PostgreSQL são modeladas com foco em clareza, desacoplamento e boas práticas.
+              </p>
+            </div>
+            <a href="https://github.com/GustavoAFD2" target="_blank" rel="noopener noreferrer" data-cursor="GITHUB" class="px-5 py-3 rounded-xl bg-blue-600 dark:bg-sky-400 hover:bg-blue-700 dark:hover:bg-sky-300 text-white dark:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all whitespace-nowrap shadow-md">
+              <i class="fa-brands fa-github text-sm mr-1.5"></i> @GustavoAFD2
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline" class="py-24 px-4 bg-slate-50/90 dark:bg-[#060B19] relative border-t border-slate-200/70 dark:border-slate-800/70">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col items-start mb-14">
+        <span class="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-sky-400 font-bold mb-1" data-i18n="timeline.subtitle">Trilha Estruturada</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-i18n="timeline.title">Jornada Backend & Roadmap Java (16 Semanas)</h2>
+      </div>
+
+      <div class="relative border-l-2 border-blue-600/30 dark:border-sky-400/30 ml-4 md:ml-32 space-y-10">
+        <div class="relative pl-8 md:pl-10">
+          <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-bold font-mono text-xs flex items-center justify-center shadow-md">01</div>
+          <span class="hidden md:block absolute -left-36 top-2 font-mono text-xs font-bold text-blue-600 dark:text-sky-400 text-right w-28">SEMANA 1-3</span>
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="md:hidden font-mono text-xs text-blue-600 dark:text-sky-400 font-bold block mb-1">SEMANA 1-3</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="timeline.phase1_title">Fase 1: Fundamentos de Java & POO</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3" data-i18n="timeline.phase1_desc">
+              Sintaxe Java 17/21, Orientação a Objetos (Encapsulamento, Herança, Polimorfismo, Abstração), Interfaces, Enums, Exceções Customizadas e Clean Code.
+            </p>
+            <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Java 17+</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">POO</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Clean Code</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative pl-8 md:pl-10">
+          <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-bold font-mono text-xs flex items-center justify-center shadow-md">02</div>
+          <span class="hidden md:block absolute -left-36 top-2 font-mono text-xs font-bold text-blue-600 dark:text-sky-400 text-right w-28">SEMANA 4-6</span>
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="md:hidden font-mono text-xs text-blue-600 dark:text-sky-400 font-bold block mb-1">SEMANA 4-6</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="timeline.phase2_title">Fase 2: Collections, Generics & Stream API</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3" data-i18n="timeline.phase2_desc">
+              Estruturas List, Set e Map, Generics, Expressões Lambda, Stream API para manipulação funcional de dados, Optional e Records.
+            </p>
+            <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Collections</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Streams API</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Optional</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative pl-8 md:pl-10">
+          <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-bold font-mono text-xs flex items-center justify-center shadow-md">03</div>
+          <span class="hidden md:block absolute -left-36 top-2 font-mono text-xs font-bold text-blue-600 dark:text-sky-400 text-right w-28">SEMANA 7-9</span>
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="md:hidden font-mono text-xs text-blue-600 dark:text-sky-400 font-bold block mb-1">SEMANA 7-9</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="timeline.phase3_title">Fase 3: SQL, Modelagem Relacional & PostgreSQL</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3" data-i18n="timeline.phase3_desc">
+              Modelagem relacional, normalização, consultas SQL com JOIN, GROUP BY e subqueries, PostgreSQL, MySQL e fundamentos de JDBC.
+            </p>
+            <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">PostgreSQL</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">SQL</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">JDBC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative pl-8 md:pl-10">
+          <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-emerald-500 text-white dark:text-slate-950 font-bold font-mono text-xs flex items-center justify-center shadow-md">04</div>
+          <span class="hidden md:block absolute -left-36 top-2 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400 text-right w-28">SEMANA 10-13</span>
+          <div class="glass-card p-6 rounded-2xl border-emerald-500/40">
+            <span class="md:hidden font-mono text-xs text-emerald-600 dark:text-emerald-400 font-bold block mb-1">SEMANA 10-13</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="timeline.phase4_title">Fase 4: Spring Boot 3, Spring Data JPA & APIs REST</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3" data-i18n="timeline.phase4_desc">
+              Arquitetura em camadas (Controller → Service → Repository), DTOs, Bean Validation (@Valid), Hibernate/JPA, Tratamento Global de Exceções (@ControllerAdvice) e testes com JUnit 5 e Mockito.
+            </p>
+            <div class="flex flex-wrap gap-2 text-[11px] font-mono text-emerald-700 dark:text-emerald-300">
+              <span class="px-2.5 py-0.5 rounded bg-emerald-500/15">Spring Boot 3</span>
+              <span class="px-2.5 py-0.5 rounded bg-emerald-500/15">Spring Data JPA</span>
+              <span class="px-2.5 py-0.5 rounded bg-emerald-500/15">JUnit 5 & Mockito</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative pl-8 md:pl-10">
+          <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-bold font-mono text-xs flex items-center justify-center shadow-md">05</div>
+          <span class="hidden md:block absolute -left-36 top-2 font-mono text-xs font-bold text-blue-600 dark:text-sky-400 text-right w-28">SEMANA 14-16</span>
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="md:hidden font-mono text-xs text-blue-600 dark:text-sky-400 font-bold block mb-1">SEMANA 14-16</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="timeline.phase5_title">Fase 5: Docker, Swagger/OpenAPI & Portfólio GitHub</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3" data-i18n="timeline.phase5_desc">
+              Conteinerização de aplicações Spring Boot e PostgreSQL com Docker, documentação interativa com Swagger/OpenAPI, Spring Security (JWT) e publicação de projetos documentados no GitHub.
+            </p>
+            <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Docker</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Swagger / OpenAPI</span>
+              <span class="px-2.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800">Spring Security JWT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-24 px-4 relative border-t border-slate-200/70 dark:border-slate-800/70">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-sky-400 font-bold mb-1" data-i18n="projects.subtitle">Código Prático & Repositórios</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-i18n="projects.title">Projetos em Destaque & GitHub</h2>
+        </div>
+        <button onclick="openArchitectureModal()" data-cursor="DIAGRAMA" class="px-4 py-2.5 rounded-xl border border-blue-600/30 dark:border-sky-400/30 bg-blue-600/10 dark:bg-sky-400/10 hover:bg-blue-600/20 text-blue-700 dark:text-sky-300 font-mono text-xs font-semibold transition-all flex items-center gap-2 self-start md:self-auto cursor-pointer">
+          <i class="fa-solid fa-sitemap"></i>
+          <span data-i18n="projects.arch_btn">Inspecionar Arquitetura REST API</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between hover:border-blue-600 dark:hover:border-sky-400 transition-all group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-blue-600/15 dark:bg-sky-400/20 text-blue-700 dark:text-sky-300 text-xs font-mono font-bold">HUB INTERATIVO</span>
+              <i class="fa-brands fa-github text-2xl text-slate-400 group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors">Plataforma de Estudos — Java Backend</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6" data-i18n="projects.proj1_desc">
+              Aplicação web interativa de acompanhamento da trilha de 16 semanas em Java Backend, com Pomodoro integrado, rastreador de stack tecnológica, caderno de anotações e vitrine de projetos.
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-700 dark:text-slate-300 mb-6">
+              <span class="px-2.5 py-1 rounded bg-slate-200/80 dark:bg-slate-800">Java Roadmap</span>
+              <span class="px-2.5 py-1 rounded bg-slate-200/80 dark:bg-slate-800">LocalStorage</span>
+              <span class="px-2.5 py-1 rounded bg-slate-200/80 dark:bg-slate-800">Tailwind CSS</span>
+            </div>
+          </div>
+          <a href="https://github.com/GustavoAFD2/java-backend-study-platform" target="_blank" rel="noopener noreferrer" data-cursor="VER REPO" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-sky-400 hover:underline">
+            <span data-i18n="projects.view_github">Ver Repositório no GitHub</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+
+        <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between hover:border-emerald-500 transition-all group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-bold">API REST & SPRING BOOT</span>
+              <i class="fa-solid fa-server text-2xl text-slate-400 group-hover:text-emerald-500 transition-colors"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Spring Boot REST Service & PostgreSQL</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6" data-i18n="projects.proj2_desc">
+              Arquitetura em camadas (Controller - Service - Repository), DTO Pattern, Bean Validation, tratamento global de exceções, testes unitários com JUnit 5/Mockito e container Docker.
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-700 dark:text-slate-300 mb-6">
+              <span class="px-2.5 py-1 rounded bg-slate-200/80 dark:bg-slate-800">Spring Boot 3</span>
+              <span class="px-2.5 py-1 rounded bg-slate-200/80 dark:bg-slate-800">PostgreSQL</span>
+              <span class="px-2.5 py-1 rounded bg-slate-200/80 dark:bg-slate-800">Docker</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <a href="https://github.com/GustavoAFD2?tab=repositories" target="_blank" rel="noopener noreferrer" data-cursor="REPOS" class="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
+              <span data-i18n="projects.explore_all">Explorar Repositórios</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+            <button onclick="openArchitectureModal()" class="text-xs font-mono text-slate-500 hover:text-blue-600 dark:hover:text-sky-400 underline cursor-pointer">Ver Diagrama</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-dot text-emerald-500 text-xs animate-pulse"></i>
+          <span data-i18n="projects.live_title">Repositórios Sincronizados em Tempo Real (GitHub API)</span>
+        </h3>
+        <span id="github-repo-count" class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-200/80 dark:bg-slate-800 px-3 py-1 rounded-full">Conectando...</span>
+      </div>
+
+      <div id="github-repos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-6 rounded-2xl animate-pulse space-y-3"><div class="h-4 bg-slate-300 dark:bg-slate-800 rounded w-3/4"></div><div class="h-3 bg-slate-300 dark:bg-slate-800 rounded w-full"></div></div>
+        <div class="glass-card p-6 rounded-2xl animate-pulse space-y-3"><div class="h-4 bg-slate-300 dark:bg-slate-800 rounded w-3/4"></div><div class="h-3 bg-slate-300 dark:bg-slate-800 rounded w-full"></div></div>
+        <div class="glass-card p-6 rounded-2xl animate-pulse space-y-3"><div class="h-4 bg-slate-300 dark:bg-slate-800 rounded w-3/4"></div><div class="h-3 bg-slate-300 dark:bg-slate-800 rounded w-full"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="arch-modal" class="fixed inset-0 z-[99997] bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="glass-card max-w-2xl w-full p-6 sm:p-8 rounded-2xl relative shadow-2xl">
+      <button onclick="closeArchitectureModal()" class="absolute top-4 right-4 text-slate-500 hover:text-slate-900 dark:hover:text-white w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="text-xs font-mono text-blue-600 dark:text-sky-400 font-bold uppercase tracking-wider block mb-1">Arquitetura em Camadas</span>
+      <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4" data-i18n="arch.modal_title">Fluxo REST API Spring Boot</h3>
+      <div class="space-y-3.5 my-5 font-mono text-xs">
+        <div class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded bg-blue-600/20 text-blue-600 dark:text-sky-400 font-bold flex items-center justify-center">1</span>
+            <div>
+              <span class="font-bold text-slate-900 dark:text-slate-100">HTTP Client / Postman / Swagger</span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Envia requisição JSON (GET, POST, PUT, DELETE)</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-down text-blue-600 dark:text-sky-400"></i>
+        </div>
+        <div class="p-3.5 rounded-xl bg-blue-600/10 border border-blue-600/30 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-bold flex items-center justify-center">2</span>
+            <div>
+              <span class="font-bold text-blue-700 dark:text-sky-300">@RestController</span>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300">Recebe DTOs, valida com @Valid e delega ao Service</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-down text-blue-600 dark:text-sky-400"></i>
+        </div>
+        <div class="p-3.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded bg-indigo-600 text-white font-bold flex items-center justify-center">3</span>
+            <div>
+              <span class="font-bold text-indigo-700 dark:text-indigo-300">@Service (Regras de Negócio)</span>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300">Processa regras, @Transactional e exceções customizadas</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-down text-indigo-500"></i>
+        </div>
+        <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded bg-emerald-600 text-white font-bold flex items-center justify-center">4</span>
+            <div>
+              <span class="font-bold text-emerald-700 dark:text-emerald-300">Spring Data JPA & PostgreSQL</span>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300">Persistência relacional mapeada via Hibernate</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-database text-emerald-500"></i>
+        </div>
+      </div>
+      <div class="pt-2 text-right">
+        <button onclick="closeArchitectureModal()" class="px-5 py-2.5 rounded-xl bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-bold text-xs uppercase tracking-wider cursor-pointer">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <section id="skills" class="py-24 px-4 bg-slate-50/90 dark:bg-[#060B19] relative border-t border-slate-200/70 dark:border-slate-800/70">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col items-start mb-10">
+        <span class="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-sky-400 font-bold mb-1" data-i18n="skills.subtitle">Ecossistema Técnico</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-i18n="skills.title">Linguagens, Frameworks & Aplicativos</h2>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 mb-10 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <button onclick="filterSkills('all')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 shadow-sm cursor-pointer" data-filter="all" data-i18n="skills.tab_all">Todos</button>
+        <button onclick="filterSkills('lang')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all glass-card text-slate-700 dark:text-slate-300 cursor-pointer" data-filter="lang" data-i18n="skills.tab_lang">Linguagens</button>
+        <button onclick="filterSkills('backend')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all glass-card text-slate-700 dark:text-slate-300 cursor-pointer" data-filter="backend" data-i18n="skills.tab_backend">Backend & Frameworks</button>
+        <button onclick="filterSkills('db')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all glass-card text-slate-700 dark:text-slate-300 cursor-pointer" data-filter="db" data-i18n="skills.tab_db">Bancos de Dados</button>
+        <button onclick="filterSkills('apps')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all glass-card text-slate-700 dark:text-slate-300 cursor-pointer" data-filter="apps" data-i18n="skills.tab_apps">Aplicativos & Ferramentas</button>
+      </div>
+
+      <div id="skills-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="lang">
+          <svg viewBox="0 0 24 24" class="w-9 h-9 mb-2" fill="none">
+            <path d="M10.2 3.2c.8 1.2-.9 2.2-.3 3.5.3.7 1 1.1 1.1 1.8" stroke="#F89820" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M13.6 2.4c.9 1.3-1 2.4-.3 3.8.3.7 1.1 1.1 1.2 1.9" stroke="#F89820" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M6.5 10.5h9.5v3.1a4.75 4.75 0 0 1-9.5 0v-3.1Z" stroke="#2563EB" class="dark:stroke-sky-400" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M16 11.2h1.4a1.8 1.8 0 0 1 0 3.6H16" stroke="#2563EB" class="dark:stroke-sky-400" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M5 19.7c3.5.9 9 .9 12.5 0" stroke="#F89820" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Java 17/21</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">POO & Core</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="backend">
+          <i class="fa-solid fa-leaf text-[#6DB33F] text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Spring Boot 3</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">REST & JPA</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="db">
+          <i class="fa-solid fa-database text-blue-600 dark:text-sky-400 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">PostgreSQL</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">SQL Relacional</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="apps">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-purple-700 via-pink-600 to-amber-500 flex items-center justify-center text-white font-mono font-black text-xs mb-2 shadow">IJ</div>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">IntelliJ IDEA</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">IDE Java</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="apps">
+          <i class="fa-brands fa-docker text-blue-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Docker</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Containers</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="apps">
+          <i class="fa-brands fa-git-alt text-orange-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Git & GitHub</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Versionamento</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="apps">
+          <i class="fa-solid fa-rocket text-orange-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Postman</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Testes API</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="apps">
+          <i class="fa-solid fa-code text-blue-600 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">VS Code</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Editor Web</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="lang">
+          <div class="w-9 h-9 rounded-lg bg-amber-400 text-slate-950 font-extrabold flex items-center justify-center text-xs mb-2">JS</div>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">JavaScript</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">ES6+</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="lang">
+          <div class="w-9 h-9 rounded-lg bg-blue-600 text-white font-extrabold flex items-center justify-center text-xs mb-2">TS</div>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">TypeScript</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Tipagem</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="db">
+          <i class="fa-solid fa-server text-blue-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">MySQL</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">SQL DB</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="backend">
+          <i class="fa-solid fa-feather-pointed text-rose-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Apache Maven</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Build & Deps</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="lang">
+          <i class="fa-brands fa-html5 text-orange-600 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">HTML5</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Web Semântica</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="lang">
+          <i class="fa-brands fa-css3-alt text-blue-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">CSS3 & Tailwind</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Interfaces</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="backend">
+          <i class="fa-solid fa-shield-halved text-emerald-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">JUnit 5 & Mockito</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Testes</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="apps">
+          <div class="w-9 h-9 rounded-lg bg-slate-900 font-mono text-xs font-bold text-sky-400 flex items-center justify-center mb-2">&gt;_</div>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Linux & Bash</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">CLI</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="backend">
+          <i class="fa-solid fa-network-wired text-emerald-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Swagger / OpenAPI</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">Docs API</span>
+        </div>
+        <div class="skill-card glass-card p-4 rounded-xl flex flex-col items-center text-center hover:scale-105 transition-all" data-category="backend">
+          <i class="fa-solid fa-layer-group text-amber-500 text-3xl mb-2"></i>
+          <span class="font-bold text-sm text-slate-900 dark:text-white">Hibernate JPA</span>
+          <span class="text-[10px] font-mono text-slate-500 mt-0.5">ORM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="terminal" class="py-24 px-4 relative border-t border-slate-200/70 dark:border-slate-800/70">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex flex-col items-center text-center mb-10">
+        <span class="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-sky-400 font-bold mb-1" data-i18n="terminal.subtitle">Demonstração Interativa</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-i18n="terminal.title">Simulador REST API Spring Boot</h2>
+        <p class="text-slate-600 dark:text-slate-400 text-sm max-w-lg mt-2" data-i18n="terminal.desc">
+          Clique nos endpoints abaixo para disparar requisições HTTP GET simuladas e inspecionar os retornos JSON.
+        </p>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden shadow-2xl">
+        <div class="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="ml-2 font-mono text-xs text-slate-400">api.gustavoalves.dev — Spring Boot 3</span>
+          </div>
+          <div class="flex items-center gap-2 font-mono text-[11px] text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>200 OK</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-100 dark:bg-slate-950 p-4 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-2">
+          <span class="text-xs font-mono text-slate-500 mr-1">GET /api/v1/</span>
+          <button onclick="fetchEndpoint('profile')" class="term-btn px-3 py-1.5 rounded-lg bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 font-mono text-xs font-bold transition-all cursor-pointer">profile</button>
+          <button onclick="fetchEndpoint('education')" class="term-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-mono text-xs transition-all cursor-pointer">education</button>
+          <button onclick="fetchEndpoint('stack')" class="term-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-mono text-xs transition-all cursor-pointer">stack</button>
+          <button onclick="fetchEndpoint('projects')" class="term-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-mono text-xs transition-all cursor-pointer">projects</button>
+        </div>
+
+        <div class="p-5 font-mono text-xs leading-relaxed bg-white dark:bg-[#040711] text-slate-800 dark:text-slate-200 min-h-[250px] overflow-x-auto">
+          <div class="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2 text-[11px] text-slate-500">
+            <span id="terminal-url">GET https://api.gustavoalves.dev/api/v1/profile</span>
+            <span id="terminal-latency" class="text-emerald-600 dark:text-emerald-400 font-bold">Latency: 14ms</span>
+          </div>
+          <pre id="terminal-code-output" class="whitespace-pre-wrap"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-slate-900 dark:bg-[#02040A] text-slate-400 border-t border-slate-800 pt-16 pb-12 px-4 relative">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10">
+      <div class="md:col-span-5 space-y-4">
+        <div class="flex items-center gap-2 text-white font-mono font-extrabold text-lg">
+          <span class="w-3 h-3 rounded-full bg-sky-400"></span>
+          <span>GUSTAVO ALVES</span>
+        </div>
+        <p class="text-xs leading-relaxed text-slate-400 max-w-sm" data-i18n="footer.bio">
+          Desenvolvedor Java Backend & Software. Estudante na Cruzeiro do Sul, FATEC Guarulhos e ETEC Parque Belém.
+        </p>
+        <div class="flex items-center gap-2.5 pt-1 text-xs font-mono text-slate-400">
+          <i class="fa-solid fa-location-dot text-sky-400"></i>
+          <span>Guarulhos, SP - Brasil</span>
+        </div>
+      </div>
+
+      <div class="md:col-span-3 space-y-3">
+        <h4 class="text-xs font-mono font-bold uppercase text-slate-200 tracking-wider" data-i18n="footer.nav_title">Navegação</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#hero" class="hover:text-sky-400 transition-colors" data-i18n="nav.hero">Início</a></li>
+          <li><a href="#about" class="hover:text-sky-400 transition-colors" data-i18n="nav.about">Sobre Mim</a></li>
+          <li><a href="#timeline" class="hover:text-sky-400 transition-colors" data-i18n="nav.timeline">Trilha Backend</a></li>
+          <li><a href="#projects" class="hover:text-sky-400 transition-colors" data-i18n="nav.projects">Projetos</a></li>
+          <li><a href="#skills" class="hover:text-sky-400 transition-colors" data-i18n="nav.skills">Stack & Apps</a></li>
+        </ul>
+      </div>
+
+      <div class="md:col-span-4 space-y-4">
+        <h4 class="text-xs font-mono font-bold uppercase text-slate-200 tracking-wider" data-i18n="footer.social_title">Conectar & Apreciação</h4>
+        <div class="flex items-center gap-3">
+          <a href="https://github.com/GustavoAFD2" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:border-sky-400 transition-all" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/gustavo-alves-b47a2b420" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-400 transition-all" title="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <button onclick="copyEmailToClipboard()" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-emerald-400 hover:border-emerald-500 transition-all cursor-pointer" title="Copiar E-mail">
+            <i class="fa-solid fa-envelope"></i>
+          </button>
+        </div>
+
+        <button onclick="appreciatePortfolio(event)" class="w-full px-4 py-3 rounded-xl bg-sky-400/15 hover:bg-sky-400/25 border border-sky-400/30 text-sky-300 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 group active:scale-95 cursor-pointer">
+          <i class="fa-solid fa-heart text-rose-500 group-hover:scale-125 transition-transform"></i>
+          <span data-i18n="footer.like_btn">Apreciar Portfólio</span>
+          <span id="like-count" class="bg-sky-400 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-extrabold ml-1">42</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 font-mono gap-4">
+      <p>© 2026 Gustavo Alves (@GustavoAFD2).</p>
+      <span>Java 21 • Spring Boot 3 • Guarulhos - SP</span>
+    </div>
+  </footer>
+
+  <script>
+    const i18n = {
+      pt: {
+        "preloader.skip": "Pular Introdução",
+        "nav.about": "Sobre Mim",
+        "nav.timeline": "Trilha Backend",
+        "nav.projects": "Projetos",
+        "nav.skills": "Stack & Apps",
+        "nav.terminal": "API Simulator",
+        "nav.hero": "Início",
+        "drawer.replay": "Reexibir Introdução",
+        "hero.badge": "DISPONÍVEL PARA ESTÁGIO",
+        "hero.greeting": "Olá! Eu sou Gustavo Alves. Desenvolvedor",
+        "hero.roadmap_btn": "Plano de Estudos Java",
+        "about.subtitle": "Engenharia & Formação",
+        "about.title": "Sobre Mim & Formação Acadêmica",
+        "about.edu1_tag": "Graduação Bacharelado",
+        "about.edu1_title": "Engenharia de Software",
+        "about.edu1_desc": "Foco em Engenharia de Requisitos, Arquitetura de Software, Qualidade de Código (Clean Code & SOLID), Modelagem de Sistemas, Ciclo de Vida do Software e Práticas DevOps.",
+        "about.time_label": "Horário Local Atual:",
+        "about.time_sub": "Disponível para oportunidades de estágio remoto, híbrido ou presencial em São Paulo.",
+        "about.edu2_tag": "Tecnólogo Superior",
+        "about.edu2_title": "Análise e Desenvolvimento de Sistemas",
+        "about.edu2_desc": "Aprofundamento prático em Algoritmos, Estruturas de Dados, Programação Orientada a Objetos em Java, Bancos de Dados Relacionais (SQL) e Engenharia de Software.",
+        "about.edu3_tag": "Ensino Técnico",
+        "about.edu3_title": "Técnico em Informática para Internet",
+        "about.edu3_desc": "Base sólida em Lógica de Programação, Desenvolvimento Web (HTML5, CSS3, JavaScript), Bancos de Dados e Fundamentos de Redes e Aplicações Internet.",
+        "about.mindset_tag": "Filosofia de Código",
+        "about.mindset_title": "Engenharia Focada em Resiliência & Legibilidade",
+        "about.mindset_desc": "Acredito que escrever código limpo é construir sistemas fáceis de manter, testar e evoluir. Cada classe Java e cada tabela PostgreSQL são modeladas com foco em clareza, desacoplamento e boas práticas.",
+        "timeline.subtitle": "Trilha Estruturada",
+        "timeline.title": "Jornada Backend & Roadmap Java (16 Semanas)",
+        "timeline.phase1_title": "Fase 1: Fundamentos de Java & POO",
+        "timeline.phase1_desc": "Sintaxe Java 17/21, Orientação a Objetos (Encapsulamento, Herança, Polimorfismo, Abstração), Interfaces, Enums, Exceções Customizadas e Clean Code.",
+        "timeline.phase2_title": "Fase 2: Collections, Generics & Stream API",
+        "timeline.phase2_desc": "Estruturas List, Set e Map, Generics, Expressões Lambda, Stream API para manipulação funcional de dados, Optional e Records.",
+        "timeline.phase3_title": "Fase 3: SQL, Modelagem Relacional & PostgreSQL",
+        "timeline.phase3_desc": "Modelagem relacional, normalização, consultas SQL com JOIN, GROUP BY e subqueries, PostgreSQL, MySQL e fundamentos de JDBC.",
+        "timeline.phase4_title": "Fase 4: Spring Boot 3, Spring Data JPA & APIs REST",
+        "timeline.phase4_desc": "Arquitetura em camadas (Controller → Service → Repository), DTOs, Bean Validation (@Valid), Hibernate/JPA, Tratamento Global de Exceções (@ControllerAdvice) e testes com JUnit 5 e Mockito.",
+        "timeline.phase5_title": "Fase 5: Docker, Swagger/OpenAPI & Portfólio GitHub",
+        "timeline.phase5_desc": "Conteinerização de aplicações Spring Boot e PostgreSQL com Docker, documentação interativa com Swagger/OpenAPI, Spring Security (JWT) e publicação de projetos documentados no GitHub.",
+        "projects.subtitle": "Código Prático & Repositórios",
+        "projects.title": "Projetos em Destaque & GitHub",
+        "projects.arch_btn": "Inspecionar Arquitetura REST API",
+        "projects.proj1_desc": "Aplicação web interativa de acompanhamento da trilha de 16 semanas em Java Backend, com Pomodoro integrado, rastreador de stack tecnológica, caderno de anotações e vitrine de projetos.",
+        "projects.proj2_desc": "Arquitetura em camadas (Controller - Service - Repository), DTO Pattern, Bean Validation, tratamento global de exceções, testes unitários com JUnit 5/Mockito e container Docker.",
+        "projects.view_github": "Ver Repositório no GitHub",
+        "projects.explore_all": "Explorar Repositórios",
+        "projects.live_title": "Repositórios Sincronizados em Tempo Real (GitHub API)",
+        "arch.modal_title": "Fluxo REST API Spring Boot",
+        "skills.subtitle": "Ecossistema Técnico",
+        "skills.title": "Linguagens, Frameworks & Aplicativos",
+        "skills.tab_all": "Todos",
+        "skills.tab_lang": "Linguagens",
+        "skills.tab_backend": "Backend & Frameworks",
+        "skills.tab_db": "Bancos de Dados",
+        "skills.tab_apps": "Aplicativos & Ferramentas",
+        "terminal.subtitle": "Demonstração Interativa",
+        "terminal.title": "Simulador REST API Spring Boot",
+        "terminal.desc": "Clique nos endpoints abaixo para disparar requisições HTTP GET simuladas e inspecionar os retornos JSON.",
+        "footer.bio": "Desenvolvedor Java Backend & Software. Estudante na Cruzeiro do Sul, FATEC Guarulhos e ETEC Parque Belém.",
+        "footer.nav_title": "Navegação",
+        "footer.social_title": "Conectar & Apreciação",
+        "footer.like_btn": "Apreciar Portfólio"
+      },
+      en: {
+        "preloader.skip": "Skip Intro",
+        "nav.about": "About Me",
+        "nav.timeline": "Backend Roadmap",
+        "nav.projects": "Projects",
+        "nav.skills": "Stack & Apps",
+        "nav.terminal": "API Simulator",
+        "nav.hero": "Home",
+        "drawer.replay": "Replay Intro",
+        "hero.badge": "AVAILABLE FOR INTERNSHIP",
+        "hero.greeting": "Hello! I’m Gustavo Alves. A Software",
+        "hero.roadmap_btn": "Java Study Plan",
+        "about.subtitle": "Engineering & Education",
+        "about.title": "About Me & Academic Background",
+        "about.edu1_tag": "Bachelor's Degree",
+        "about.edu1_title": "Software Engineering",
+        "about.edu1_desc": "Focused on Requirements Engineering, Software Architecture, Code Quality (Clean Code & SOLID), System Modeling, Software Lifecycle, and DevOps practices.",
+        "about.time_label": "Current Local Time:",
+        "about.time_sub": "Available for remote, hybrid, or on-site internship opportunities in São Paulo.",
+        "about.edu2_tag": "Associate Degree",
+        "about.edu2_title": "Systems Analysis & Development",
+        "about.edu2_desc": "Hands-on focus on Algorithms, Data Structures, Object-Oriented Programming in Java, Relational Databases (SQL), and Software Engineering.",
+        "about.edu3_tag": "Technical Degree",
+        "about.edu3_title": "Internet IT Technician",
+        "about.edu3_desc": "Strong foundation in Programming Logic, Web Development (HTML5, CSS3, JavaScript), Databases, and Internet Networking.",
+        "about.mindset_tag": "Engineering Mindset",
+        "about.mindset_title": "Engineering Focused on Resilience & Readability",
+        "about.mindset_desc": "I believe writing clean code means building systems that are easy to maintain, test, and scale. Every Java class and PostgreSQL table is designed for clarity and decoupling.",
+        "timeline.subtitle": "Structured Roadmap",
+        "timeline.title": "Backend Journey & Java Roadmap (16 Weeks)",
+        "timeline.phase1_title": "Phase 1: Java Fundamentals & OOP",
+        "timeline.phase1_desc": "Java 17/21 syntax, Object-Oriented Programming (Encapsulation, Inheritance, Polymorphism, Abstraction), Interfaces, Enums, Custom Exceptions, and Clean Code.",
+        "timeline.phase2_title": "Phase 2: Collections, Generics & Stream API",
+        "timeline.phase2_desc": "List, Set, and Map structures, Generics, Lambda expressions, Stream API for functional data processing, Optional, and Records.",
+        "timeline.phase3_title": "Phase 3: SQL, Relational Modeling & PostgreSQL",
+        "timeline.phase3_desc": "Relational modeling, normalization, SQL queries with JOIN, GROUP BY, and subqueries, PostgreSQL, MySQL, and JDBC fundamentals.",
+        "timeline.phase4_title": "Phase 4: Spring Boot 3, Spring Data JPA & REST APIs",
+        "timeline.phase4_desc": "Layered architecture (Controller → Service → Repository), DTOs, Bean Validation (@Valid), Hibernate/JPA, Global Exception Handling (@ControllerAdvice), and JUnit 5 / Mockito tests.",
+        "timeline.phase5_title": "Phase 5: Docker, Swagger/OpenAPI & GitHub Portfolio",
+        "timeline.phase5_desc": "Containerizing Spring Boot and PostgreSQL apps with Docker, interactive Swagger/OpenAPI documentation, Spring Security (JWT), and well-documented GitHub repositories.",
+        "projects.subtitle": "Practical Code & Repositories",
+        "projects.title": "Featured Projects & GitHub",
+        "projects.arch_btn": "Inspect REST API Architecture",
+        "projects.proj1_desc": "Interactive web study tracker for the 16-week Java Backend roadmap featuring an integrated Pomodoro timer, tech stack unlocks, phase notebooks, and project showcase.",
+        "projects.proj2_desc": "Layered architecture (Controller - Service - Repository), DTO Pattern, Bean Validation, global exception handling, JUnit 5/Mockito unit tests, and Docker containers.",
+        "projects.view_github": "View Repository on GitHub",
+        "projects.explore_all": "Explore Repositories",
+        "projects.live_title": "Real-Time Synchronized Repositories (GitHub API)",
+        "arch.modal_title": "Spring Boot REST API Flow",
+        "skills.subtitle": "Technical Ecosystem",
+        "skills.title": "Languages, Frameworks & Applications",
+        "skills.tab_all": "All",
+        "skills.tab_lang": "Languages",
+        "skills.tab_backend": "Backend & Frameworks",
+        "skills.tab_db": "Databases",
+        "skills.tab_apps": "Apps & Tools",
+        "terminal.subtitle": "Interactive Demo",
+        "terminal.title": "Spring Boot REST API Simulator",
+        "terminal.desc": "Click the endpoints below to trigger simulated HTTP GET requests and inspect JSON responses.",
+        "footer.bio": "Java Backend & Software Developer. Studying at Cruzeiro do Sul, FATEC Guarulhos, and ETEC Parque Belém.",
+        "footer.nav_title": "Navigation",
+        "footer.social_title": "Connect & Appreciation",
+        "footer.like_btn": "Appreciate Portfolio"
+      }
+    };
+
+    let currentLang = 'pt';
+    let currentEndpoint = 'profile';
+    let drawerOpen = false;
+
+    function toggleDrawer() {
+      const drawer = document.getElementById('nav-drawer');
+      const backdrop = document.getElementById('nav-drawer-backdrop');
+      if (!drawer || !backdrop) return;
+      drawerOpen = !drawerOpen;
+      if (drawerOpen) {
+        backdrop.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          backdrop.classList.remove('opacity-0');
+          drawer.classList.remove('translate-x-full');
+        });
+      } else {
+        backdrop.classList.add('opacity-0');
+        drawer.classList.add('translate-x-full');
+        setTimeout(() => backdrop.classList.add('hidden'), 300);
+      }
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const text = document.getElementById('toast-message');
+      if (!box || !text) return;
+      text.textContent = msg;
+      box.classList.remove('opacity-0', 'translate-y-3');
+      setTimeout(() => box.classList.add('opacity-0', 'translate-y-3'), 2400);
+    }
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      try { localStorage.setItem('gustavo_portfolio_lang', lang); } catch (e) {}
+      try {
+        if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+          const url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          window.history.replaceState({}, '', url);
+        }
+      } catch (e) {}
+
+      const ptBtn = document.getElementById('lang-pt-btn');
+      const enBtn = document.getElementById('lang-en-btn');
+      if (lang === 'pt') {
+        ptBtn.className = 'px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-all bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 cursor-pointer';
+        enBtn.className = 'px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-sky-400 cursor-pointer';
+      } else {
+        enBtn.className = 'px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-all bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 cursor-pointer';
+        ptBtn.className = 'px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-sky-400 cursor-pointer';
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
+      });
+      fetchEndpoint(currentEndpoint);
+    }
+
+    const greetings = [
+      { word: 'Olá', lang: 'Português' },
+      { word: 'Hola', lang: 'Español' },
+      { word: 'Bonjour', lang: 'Français' },
+      { word: 'Ciao', lang: 'Italiano' },
+      { word: 'Hallo', lang: 'Deutsch' },
+      { word: 'こんにちは', lang: '日本語' },
+      { word: 'Hello', lang: 'English' }
+    ];
+    let preloaderTimer = null;
+
+    function runPreloader() {
+      const preloader = document.getElementById('preloader');
+      const textEl = document.getElementById('preloader-text');
+      const tagEl = document.getElementById('preloader-lang-tag');
+      const barEl = document.getElementById('preloader-bar');
+      if (!preloader || !textEl) return;
+
+      preloader.style.display = 'flex';
+      preloader.style.transform = 'translateY(0%)';
+      let index = 0;
+
+      function nextWord() {
+        if (index >= greetings.length) {
+          setTimeout(finishPreloader, 450);
+          return;
+        }
+        textEl.classList.remove('preloader-word-anim');
+        void textEl.offsetWidth;
+        textEl.textContent = `• ${greetings[index].word}`;
+        textEl.classList.add('preloader-word-anim');
+        if (tagEl) tagEl.textContent = greetings[index].lang;
+        if (barEl) barEl.style.width = `${Math.round(((index + 1) / greetings.length) * 100)}%`;
+        index++;
+        preloaderTimer = setTimeout(nextWord, 480);
+      }
+
+      nextWord();
+      setTimeout(finishPreloader, 4600);
+    }
+
+    function finishPreloader() {
+      if (preloaderTimer) clearTimeout(preloaderTimer);
+      const preloader = document.getElementById('preloader');
+      if (!preloader) return;
+      preloader.style.transform = 'translateY(-100%)';
+      setTimeout(() => { preloader.style.display = 'none'; }, 700);
+    }
+
+    function replayPreloader() { runPreloader(); }
+
+    function toggleTheme(event) {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      const btn = document.getElementById('theme-toggle-btn');
+      const rect = btn ? btn.getBoundingClientRect() : { left: 24, top: 24, width: 44, height: 44 };
+      const x = event && event.clientX ? event.clientX : rect.left + rect.width / 2;
+      const y = event && event.clientY ? event.clientY : rect.top + rect.height / 2;
+
+      html.style.setProperty('--click-x', `${x}px`);
+      html.style.setProperty('--click-y', `${y}px`);
+
+      const applySwitch = () => {
+        if (isDark) {
+          html.classList.remove('dark');
+          try { localStorage.setItem('gustavo_theme', 'light'); } catch (e) {}
+        } else {
+          html.classList.add('dark');
+          try { localStorage.setItem('gustavo_theme', 'dark'); } catch (e) {}
+        }
+      };
+
+      if (typeof document.startViewTransition === 'function') {
+        document.startViewTransition(() => applySwitch());
+      } else {
+        applySwitch();
+      }
+    }
+
+    function initReticleCursor() {
+      const cursor = document.getElementById('reticle-cursor');
+      const label = document.getElementById('cursor-label');
+      if (!cursor || window.matchMedia('(pointer: coarse)').matches) return;
+
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let curX = mouseX;
+      let curY = mouseY;
+      let lockedEl = null;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateCursor() {
+        let targetX = mouseX;
+        let targetY = mouseY;
+
+        if (lockedEl && lockedEl.isConnected) {
+          const rect = lockedEl.getBoundingClientRect();
+          const isTextTarget = lockedEl.matches('h1, h2, h3, h4, p, blockquote, span[data-i18n], #scramble-title, #guarulhos-clock');
+          if (isTextTarget) {
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            targetX = mouseX + (centerX - mouseX) * 0.45;
+            targetY = mouseY + (centerY - mouseY) * 0.45;
+          }
+        }
+
+        const lerpFactor = lockedEl ? 0.16 : 0.22;
+        curX += (targetX - curX) * lerpFactor;
+        curY += (targetY - curY) * lerpFactor;
+        cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      document.addEventListener('mouseover', (e) => {
+        const interactiveTarget = e.target.closest('[data-cursor], a, button');
+        const textTarget = !interactiveTarget ? e.target.closest('h1, h2, h3, h4, p, blockquote, #scramble-title, #guarulhos-clock') : null;
+
+        if (interactiveTarget) {
+          lockedEl = interactiveTarget;
+          cursor.classList.remove('text-lock');
+          cursor.style.width = '52px';
+          cursor.style.height = '52px';
+          const customText = interactiveTarget.getAttribute('data-cursor');
+          if (customText && label) {
+            label.textContent = customText;
+            label.classList.remove('opacity-0', 'translate-y-1');
+          }
+        } else if (textTarget) {
+          lockedEl = textTarget;
+          const rect = textTarget.getBoundingClientRect();
+          cursor.classList.add('text-lock');
+          cursor.style.width = `${Math.min(Math.max(rect.width * 0.35, 44), 130)}px`;
+          cursor.style.height = `${Math.min(Math.max(rect.height + 10, 34), 68)}px`;
+          if (label) {
+            label.textContent = 'LER';
+            label.classList.remove('opacity-0', 'translate-y-1');
+          }
+        }
+      });
+
+      document.addEventListener('mouseout', (e) => {
+        const leftTarget = e.target.closest('[data-cursor], a, button, h1, h2, h3, h4, p, blockquote, #scramble-title, #guarulhos-clock');
+        if (leftTarget && leftTarget === lockedEl) {
+          lockedEl = null;
+          cursor.classList.remove('text-lock');
+          cursor.style.width = '40px';
+          cursor.style.height = '40px';
+          if (label) label.classList.add('opacity-0', 'translate-y-1');
+        }
+      });
+    }
+
+    function initSmoothScroll() {
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+      let currentScroll = window.scrollY;
+      let targetScroll = window.scrollY;
+      let isAnimatingScroll = false;
+
+      function easeScrollStep() {
+        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+        currentScroll += (targetScroll - currentScroll) * 0.085;
+
+        if (Math.abs(targetScroll - currentScroll) < 0.5) {
+          currentScroll = targetScroll;
+          window.scrollTo(0, currentScroll);
+          isAnimatingScroll = false;
+          return;
+        }
+        window.scrollTo(0, currentScroll);
+        requestAnimationFrame(easeScrollStep);
+      }
+
+      window.addEventListener('wheel', (e) => {
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        const insideScrollable = e.target.closest('pre, textarea, #nav-drawer');
+        if (insideScrollable && insideScrollable.scrollHeight > insideScrollable.clientHeight) return;
+
+        e.preventDefault();
+        if (!isAnimatingScroll) {
+          currentScroll = window.scrollY;
+          targetScroll = window.scrollY;
+        }
+        targetScroll += e.deltaY * 1.05;
+        if (!isAnimatingScroll) {
+          isAnimatingScroll = true;
+          requestAnimationFrame(easeScrollStep);
+        }
+      }, { passive: false });
+
+      window.addEventListener('scroll', () => {
+        if (!isAnimatingScroll) {
+          currentScroll = window.scrollY;
+          targetScroll = window.scrollY;
+        }
+      }, { passive: true });
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          const targetId = anchor.getAttribute('href');
+          if (!targetId || targetId === '#') return;
+          const dest = document.querySelector(targetId);
+          if (!dest) return;
+          e.preventDefault();
+          currentScroll = window.scrollY;
+          targetScroll = dest.getBoundingClientRect().top + window.scrollY;
+          if (!isAnimatingScroll) {
+            isAnimatingScroll = true;
+            requestAnimationFrame(easeScrollStep);
+          }
+        });
+      });
+    }
+
+    const heroRoles = ['BACKEND', 'ENGINEER', 'JAVA DEV'];
+    let currentRoleIdx = 0;
+
+    function scrambleHeroTitle(nextWord) {
+      const el = document.getElementById('scramble-title');
+      if (!el) return;
+      if (!nextWord) {
+        currentRoleIdx = (currentRoleIdx + 1) % heroRoles.length;
+        nextWord = heroRoles[currentRoleIdx];
+      }
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%';
+      let iteration = 0;
+
+      const interval = setInterval(() => {
+        el.textContent = nextWord
+          .split('')
+          .map((letter, idx) => {
+            if (letter === ' ') return ' ';
+            if (idx < iteration) return nextWord[idx];
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join('');
+        if (iteration >= nextWord.length) clearInterval(interval);
+        iteration += 1 / 2;
+      }, 38);
+    }
+
+    setInterval(() => {
+      currentRoleIdx = (currentRoleIdx + 1) % heroRoles.length;
+      scrambleHeroTitle(heroRoles[currentRoleIdx]);
+    }, 4500);
+
+    function startGuarulhosClock() {
+      const clockEl = document.getElementById('guarulhos-clock');
+      if (!clockEl) return;
+      const update = () => {
+        try {
+          clockEl.textContent = new Date().toLocaleTimeString('pt-BR', {
+            timeZone: 'America/Sao_Paulo',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+        } catch (e) {
+          clockEl.textContent = new Date().toTimeString().slice(0, 8);
+        }
+      };
+      update();
+      setInterval(update, 1000);
+    }
+
+    function copyEmailToClipboard() {
+      const email = 'webdevelopergustavoaf@gmail.com';
+      const tempInput = document.createElement('input');
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast(currentLang === 'pt' ? 'E-mail copiado: webdevelopergustavoaf@gmail.com' : 'Email copied: webdevelopergustavoaf@gmail.com');
+      } catch (e) {}
+      document.body.removeChild(tempInput);
+    }
+
+    function openArchitectureModal() {
+      const modal = document.getElementById('arch-modal');
+      if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+    }
+
+    function closeArchitectureModal() {
+      const modal = document.getElementById('arch-modal');
+      if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+    }
+
+    function filterSkills(category) {
+      document.querySelectorAll('.skill-tab-btn').forEach(btn => {
+        const active = btn.getAttribute('data-filter') === category;
+        btn.className = active
+          ? 'skill-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-blue-600 dark:bg-sky-400 text-white dark:text-slate-950 shadow-sm cursor-pointer'
+          : 'skill-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all glass-card text-slate-700 dark:text-slate-300 cursor-pointer';
+      });
+      document.querySelectorAll('.skill-card').forEach(card => {
+        card.style.display = (category === 'all' || card.getAttribute('data-category') === category) ? 'flex' : 'none';
+      });
+    }
+
+    function syntaxHighlightJSON(jsonObj) {
+      const str = JSON.stringify(jsonObj, null, 2);
+      return str.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) => {
+        let cls = 'json-number';
+        if (/^"/.test(match)) cls = /:$/.test(match) ? 'json-key' : 'json-string';
+        else if (/true|false/.test(match)) cls = 'json-boolean';
+        return `<span class="${cls}">${match}</span>`;
+      });
+    }
+
+    function fetchEndpoint(endpoint) {
+      currentEndpoint = endpoint;
+      const urlEl = document.getElementById('terminal-url');
+      const latEl = document.getElementById('terminal-latency');
+      const outEl = document.getElementById('terminal-code-output');
+      if (!outEl) return;
+
+      const latency = Math.floor(Math.random() * 18) + 9;
+      if (urlEl) urlEl.textContent = `GET https://api.gustavoalves.dev/api/v1/${endpoint}`;
+      if (latEl) latEl.textContent = `Latency: ${latency}ms`;
+
+      const payloads = {
+        profile: {
+          name: "Gustavo Alves",
+          email: "webdevelopergustavoaf@gmail.com",
+          github: "https://github.com/GustavoAFD2",
+          linkedin: "https://www.linkedin.com/in/gustavo-alves-b47a2b420",
+          location: "Guarulhos, SP - Brasil",
+          role: currentLang === 'pt' ? "Desenvolvedor Java Backend" : "Java Backend Developer",
+          openToInternship: true
+        },
+        education: [
+          { degree: currentLang === 'pt' ? "Engenharia de Software" : "Software Engineering", institution: "Universidade Cruzeiro do Sul", level: currentLang === 'pt' ? "Bacharelado" : "Bachelor's" },
+          { degree: currentLang === 'pt' ? "Análise e Desenvolvimento de Sistemas" : "Systems Analysis & Development", institution: "FATEC Guarulhos", level: currentLang === 'pt' ? "Tecnólogo Superior" : "Associate Degree" },
+          { degree: currentLang === 'pt' ? "Técnico em Informática para Internet" : "Internet IT Technician", institution: "ETEC Parque Belém", level: currentLang === 'pt' ? "Técnico" : "Technical" }
+        ],
+        stack: {
+          languages: ["Java 17/21", "SQL", "JavaScript", "TypeScript", "HTML5", "CSS3"],
+          frameworks: ["Spring Boot 3", "Spring Data JPA", "Hibernate", "Spring Security", "JUnit 5"],
+          databases: ["PostgreSQL", "MySQL"],
+          tools: ["IntelliJ IDEA", "Docker", "Git", "Postman", "VS Code", "Maven"]
+        },
+        projects: [
+          { name: "java-backend-study-platform", url: "https://github.com/GustavoAFD2/java-backend-study-platform", status: "ACTIVE" },
+          { name: "spring-boot-rest-api", stack: ["Java 21", "Spring Boot 3", "PostgreSQL", "Docker"], architecture: "Controller -> Service -> Repository" }
+        ]
+      };
+      outEl.innerHTML = syntaxHighlightJSON(payloads[endpoint] || payloads.profile);
+    }
+
+    async function loadGitHubRepos() {
+      const grid = document.getElementById('github-repos-grid');
+      const countBadge = document.getElementById('github-repo-count');
+      if (!grid) return;
+
+      try {
+        const res = await fetch('https://api.github.com/users/GustavoAFD2/repos?sort=updated&per_page=6');
+        if (!res.ok) throw new Error('GitHub API limit');
+        const repos = await res.json();
+        const filtered = repos.filter(r => !r.fork).slice(0, 6);
+        if (countBadge) countBadge.textContent = `${filtered.length} repos`;
+        if (filtered.length === 0) throw new Error('No public repos');
+
+        grid.innerHTML = filtered.map(repo => `
+          <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" data-cursor="ABRIR" class="glass-card p-6 rounded-2xl flex flex-col justify-between hover:border-blue-600 dark:hover:border-sky-400 hover:-translate-y-1 transition-all group">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-blue-600/10 dark:bg-sky-400/15 text-blue-700 dark:text-sky-300 font-semibold">${repo.language || 'Code'}</span>
+                <span class="text-xs font-mono text-slate-400 flex items-center gap-1"><i class="fa-regular fa-star text-amber-400"></i> ${repo.stargazers_count}</span>
+              </div>
+              <h4 class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors mb-2 truncate">${repo.name}</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">${repo.description || (currentLang === 'pt' ? 'Repositório desenvolvido por Gustavo Alves no GitHub.' : 'Repository built by Gustavo Alves on GitHub.')}</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
+              <span>@GustavoAFD2</span>
+              <span class="text-blue-600 dark:text-sky-400 font-bold">GitHub ↗</span>
+            </div>
+          </a>
+        `).join('');
+      } catch (e) {
+        if (countBadge) countBadge.textContent = 'GitHub @GustavoAFD2';
+        grid.innerHTML = `
+          <a href="https://github.com/GustavoAFD2" target="_blank" rel="noopener noreferrer" class="md:col-span-3 glass-card p-6 rounded-2xl flex items-center justify-between hover:border-blue-600 transition-all">
+            <div>
+              <h4 class="font-bold text-base text-slate-900 dark:text-white">Ver todos os repositórios de @GustavoAFD2 no GitHub</h4>
+              <p class="text-xs text-slate-500 mt-1">Acesse github.com/GustavoAFD2 para acompanhar projetos em Java, Spring Boot e Web.</p>
+            </div>
+            <i class="fa-brands fa-github text-3xl text-blue-600 dark:text-sky-400"></i>
+          </a>
+        `;
+      }
+    }
+
+    let likes = 42;
+    try {
+      const savedLikes = localStorage.getItem('gustavo_portfolio_likes');
+      if (savedLikes) likes = parseInt(savedLikes, 10) || 42;
+    } catch (e) {}
+
+    function appreciatePortfolio(event) {
+      likes++;
+      try { localStorage.setItem('gustavo_portfolio_likes', likes); } catch (e) {}
+      const countEl = document.getElementById('like-count');
+      if (countEl) countEl.textContent = likes;
+
+      const x = event ? event.clientX : window.innerWidth / 2;
+      const y = event ? event.clientY : window.innerHeight - 80;
+
+      for (let i = 0; i < 6; i++) {
+        const p = document.createElement('span');
+        p.className = 'heart-particle text-rose-500 text-sm';
+        p.innerHTML = i % 2 === 0 ? '❤️' : '☕';
+        p.style.left = `${x + (Math.random() * 50 - 25)}px`;
+        p.style.top = `${y + (Math.random() * 20 - 10)}px`;
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 950);
+      }
+      showToast(currentLang === 'pt' ? 'Obrigado pelo apoio! ☕' : 'Thanks for appreciating! ☕');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const savedTheme = localStorage.getItem('gustavo_theme');
+        if (savedTheme === 'light') document.documentElement.classList.remove('dark');
+        else document.documentElement.classList.add('dark');
+      } catch (e) {}
+
+      const countEl = document.getElementById('like-count');
+      if (countEl) countEl.textContent = likes;
+
+      let initialLang = 'pt';
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const qLang = params.get('lang');
+        const sLang = localStorage.getItem('gustavo_portfolio_lang');
+        if (qLang === 'en' || sLang === 'en') initialLang = 'en';
+      } catch (e) {}
+
+      switchLanguage(initialLang);
+      initReticleCursor();
+      initSmoothScroll();
+      startGuarulhosClock();
+      loadGitHubRepos();
+      runPreloader();
+    });
+  </script>
+</body>
+</html>
